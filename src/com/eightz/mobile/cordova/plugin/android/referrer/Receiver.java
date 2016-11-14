@@ -13,17 +13,22 @@ import android.util.Log;
 
 public class Receiver extends BroadcastReceiver {
 
+public static final String PREFS_NAME = "NativeStorage";
+public static final String REFFERER = "refferer";
+
 @Override
 public void onReceive(Context context, Intent intent) {
 
     Bundle extras = intent.getExtras();
     if (extras != null) {
+
     	String referrerString = extras.getString("referrer");
         if (referrerString != null) {
-    	    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-    	    Editor edit = sharedPreferences.edit();
-    	    edit.putString("referrer", referrerString);
+           SharedPreferences mPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+    	    Editor edit = mPrefs.edit();
+    	    edit.putString(REFFERER, referrerString);
     	    edit.commit();
         }
     }
