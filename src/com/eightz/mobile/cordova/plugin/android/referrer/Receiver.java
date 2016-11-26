@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
+import android.widget.Toast;
 import android.util.Log;
 
 public class Receiver extends BroadcastReceiver {
@@ -23,6 +24,10 @@ public void onReceive(Context context, Intent intent) {
     if (extras != null) {
 
     	String referrerString = extras.getString("referrer");
+
+        Toast.makeText(context, "REFERRER " + referrerString, Toast.LENGTH_SHORT).show();
+
+
         if (referrerString != null) {
 
            SharedPreferences mPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -31,6 +36,7 @@ public void onReceive(Context context, Intent intent) {
     	    edit.putString(REFERRER, referrerString);
     	    edit.commit();
         }
+        Log.v(REFERRER, referrerString);
     }
 }
  
